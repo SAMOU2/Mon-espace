@@ -6,15 +6,17 @@ Un site web immersif offert en cadeau : un voyage féerique qui raconte votre hi
 ## 📁 Fichiers
 
 ```
-lili-monde-magique/
+mon-espace/             ← tous les fichiers dans le MÊME dossier (à plat)
 ├── index.html          ← le site complet (à ouvrir dans un navigateur)
 ├── README.md           ← ce guide
-└── images/             ← les décors peints des chapitres
-    ├── etoiles.jpg     (Chapitre I — La Nuit Étoilée)
-    ├── foret.jpg       (Chapitre II — La Forêt Enchantée)
-    ├── ocean.jpg       (Chapitre III — L’Océan des Rêves)
-    └── jardin.jpg      (Le Jardin Céleste — la lettre finale)
+├── etoiles.jpg         (Chapitre I — La Nuit Étoilée)
+├── foret.jpg           (Chapitre II — La Forêt Enchantée)
+├── ocean.jpg           (Chapitre III — L'Océan des Rêves)
+└── jardin.jpg          (Le Jardin Céleste — la lettre finale)
 ```
+
+⚠️ **Important** : le fichier HTML doit s'appeler exactement `index.html`
+(sans `(2)` ni autre suffixe), sinon GitHub Pages n'affichera pas le site.
 
 ## 💌 Personnaliser le site (2 minutes)
 
@@ -29,7 +31,7 @@ Tout le contenu se trouve dans le bloc `CONFIG` en haut du `<script>` dans `inde
 6. **`choices`** → les 3 choix interactifs du roman visuel.
 7. **`scratch`** → le message secret de la carte à gratter (ex : un bon pour un week-end).
 
-💡 Astuce : pour ajouter **vos photos**, remplace l’image d’un chapitre dans `images/`
+💡 Astuce : pour ajouter **vos photos**, remplace l’image d’un chapitre à la racine du dossier
 (avec le même nom de fichier), ou ajoute une carte `<img>` dans le Bento.
 
 ## 🎵 La musique
@@ -39,7 +41,7 @@ Le bouton 🎵 en haut à droite permet de couper/remettre le son.
 Pour utiliser votre propre chanson, ajoute dans `<body>` :
 
 ```html
-<audio id="ma-chanson" loop src="images/notre-chanson.mp3"></audio>
+<audio id="ma-chanson" loop src="notre-chanson.mp3"></audio>
 ```
 
 puis dans le script, remplacez `startPad()` par `document.getElementById('ma-chanson').play()`.
