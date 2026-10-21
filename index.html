@@ -152,12 +152,6 @@
         box-shadow: 0 0 56px rgba(244, 114, 182, 0.7), inset 0 0 26px rgba(255, 255, 255, 0.2);
     }
 
-    .gate-hint {
-        margin-top: 16px;
-        font-size: 0.86rem;
-        color: #b9a7e8;
-    }
-
     /* --- Étoiles CSS de la porte --- */
     .gate-star {
         position: absolute;
@@ -165,32 +159,6 @@
         background: #fff;
         box-shadow: 0 0 10px #fff;
         animation: twinkle 2.8s ease-in-out infinite;
-    }
-
-    /* ============================================================
-       🎵 BOUTON MUSIQUE
-       ============================================================ */
-    #music-btn {
-        position: fixed;
-        top: 22px; right: 22px;
-        z-index: 80;
-        width: 54px; height: 54px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        color: #fff;
-        font-size: 1.35rem;
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
-        box-shadow: 0 0 22px rgba(167, 139, 250, 0.35);
-    }
-
-    #music-btn:hover { transform: scale(1.12); }
-    #music-btn.on {
-        background: rgba(244, 114, 182, 0.32);
-        box-shadow: 0 0 30px rgba(244, 114, 182, 0.6);
-        animation: pulse-glow 2.2s ease-in-out infinite;
     }
 
     /* ============================================================
@@ -598,8 +566,7 @@
     /* Au survol : l'émoji s'excite et danse plus vite ! */
     .card:hover .icon,
     .choice-btn:hover .btn-icon,
-    #enter-btn:hover .btn-icon,
-    #music-btn:hover .btn-icon {
+    #enter-btn:hover .btn-icon {
         animation-duration: 0.8s !important;
         filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.75)) brightness(1.18);
     }
@@ -998,21 +965,70 @@
 
 
     /* ============================================================
-       📱 RESPONSIVE
+       📱 RESPONSIVE — téléphone, tablette, ordinateur, paysage
        ============================================================ */
+
+    /* Hauteur réaliste sur mobile (barre d'adresse du navigateur) */
+    section, .hero { min-height: 100svh; }
+
+    /* Boutons : zones de confort au doigt + texte jamais débordant */
+    button { min-height: 48px; touch-action: manipulation; }
+    .glass, .card, .gate-sub, .hero-tagline { overflow-wrap: break-word; }
+
+    /* Tablettes */
     @media (max-width: 820px) {
         .bento { grid-template-columns: 1fr 1fr; }
         .card.wide { grid-column: span 2; }
+        .glass { padding: 2.1rem 1.7rem; }
     }
 
+    /* Téléphones */
     @media (max-width: 560px) {
-        section { padding: 11vh 7vw; }
+        section { padding: 10vh 6vw; }
         .bento { grid-template-columns: 1fr; }
         .card.wide { grid-column: span 1; }
-        .orb { width: 96px; height: 96px; }
-        .orb .num { font-size: 1.5rem; }
-        .type-text, .letter-text { min-height: 11em; }
-        .glass { padding: 1.7rem 1.35rem; }
+        .glass { padding: 1.65rem 1.25rem; border-radius: 20px; }
+        .gate-title { font-size: clamp(2.3rem, 11vw, 3.3rem); }
+        .gate-sub { font-size: 1rem; margin-bottom: 28px; line-height: 1.75; }
+        .gate-book { font-size: clamp(3.6rem, 16vw, 5.2rem); }
+        #enter-btn { padding: 16px 28px; font-size: 1.05rem; }
+        .choices-row { flex-direction: column; align-items: stretch; }
+        .choice-btn { width: 100%; padding: 15px 16px; font-size: 0.98rem; }
+        .orbs { gap: 12px; margin-top: 28px; }
+        .orb { width: 92px; height: 92px; }
+        .orb .num { font-size: 1.45rem; }
+        .scratch-zone { width: min(320px, 90vw); }
+        .scratch-card { height: 185px; }
+        .type-text, .letter-text { min-height: 12em; }
+        #choice-output { min-height: 9em; font-size: 1.05rem; }
+        .scroll-hint { margin-top: 40px; }
+        footer { padding: 44px 18px 36px; font-size: 0.88rem; }
+    }
+
+    /* Très petits écrans (ex : iPhone SE) */
+    @media (max-width: 380px) {
+        .hero h1 { font-size: 2.85rem; }
+        h2 { font-size: 1.55rem; }
+        .orb { width: 82px; height: 82px; }
+        .orb .num { font-size: 1.28rem; }
+        .orb .lab { font-size: 0.6rem; letter-spacing: 0.12em; }
+        .chapter-label { letter-spacing: 0.16em; padding: 7px 12px; font-size: 0.66rem; }
+        .gate-overline { letter-spacing: 0.3em; }
+    }
+
+    /* Écrans larges (ordinateurs) */
+    @media (min-width: 1400px) {
+        .glass { max-width: 780px; }
+        .bento-wrap { max-width: 1120px; }
+    }
+
+    /* Téléphone en paysage / écran court */
+    @media (max-height: 520px) {
+        section { padding: 7vh 6vw; min-height: auto; }
+        .hero { padding-top: 11vh; padding-bottom: 9vh; }
+        .scroll-hint { margin-top: 26px; }
+        .type-text, .letter-text { min-height: 5.5em; }
+        .gate-sub { margin-bottom: 22px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1044,10 +1060,7 @@
         Lili, es-tu prête à y entrer ?
     </p>
     <button id="enter-btn">✨ Ouvre le grimoire ✨</button>
-    <p class="gate-hint">🎵 une douce mélodie t’accompagnera…</p>
 </div>
-
-<button id="music-btn" aria-label="Musique">🎵</button>
 
 <main>
 
@@ -1716,98 +1729,7 @@ document.getElementById("enter-btn").addEventListener("click", () => {
     gate.classList.add("hidden");
     document.body.classList.remove("locked");
     burst(window.innerWidth / 2, window.innerHeight / 2, 60);
-    startMusic(true);
     setTimeout(() => gate.remove(), 1300);
-});
-
-/* ============================================================
-   🎵 MUSIQUE — mélodie douce générée (Web Audio, aucun fichier)
-   ============================================================ */
-let audioCtx = null, master = null, pad = [], musicOn = false;
-
-function initAudio() {
-    if (audioCtx) return;
-    const AC = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AC();
-    master = audioCtx.createGain();
-    master.gain.value = 0;
-    master.connect(audioCtx.destination);
-}
-
-function startPad() {
-    initAudio();
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    if (pad.length) return;
-    const freqs = [110, 164.81, 220, 329.63]; // accords doux A2 – E3 – A3 – E4
-    pad = freqs.map((f, i) => {
-        const o = audioCtx.createOscillator();
-        o.type = i % 2 ? "sine" : "triangle";
-        o.frequency.value = f;
-        const g = audioCtx.createGain();
-        g.gain.value = 0.045 / (i * 0.6 + 1);
-        const lfo = audioCtx.createOscillator();
-        lfo.frequency.value = 0.05 + i * 0.017;
-        const lfoGain = audioCtx.createGain();
-        lfoGain.gain.value = 0.018;
-        lfo.connect(lfoGain);
-        lfoGain.connect(g.gain);
-        o.connect(g);
-        g.connect(master);
-        o.start();
-        lfo.start();
-        return { o, lfo };
-    });
-    master.gain.cancelScheduledValues(audioCtx.currentTime);
-    master.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 2.2);
-}
-
-function stopPad() {
-    if (!audioCtx || !pad.length) return;
-    master.gain.cancelScheduledValues(audioCtx.currentTime);
-    master.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.9);
-    const nodes = pad.slice();
-    pad = [];
-    setTimeout(() => nodes.forEach(n => { n.o.stop(); n.lfo.stop(); }), 1000);
-}
-
-function chime() {
-    if (!musicOn || !audioCtx) return;
-    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
-        const o = audioCtx.createOscillator();
-        o.type = "sine";
-        o.frequency.value = f;
-        const g = audioCtx.createGain();
-        g.gain.value = 0;
-        o.connect(g);
-        g.connect(master);
-        const t = audioCtx.currentTime + i * 0.13;
-        g.gain.setValueAtTime(0, t);
-        g.gain.linearRampToValueAtTime(0.14, t + 0.02);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 1.4);
-        o.start(t);
-        o.stop(t + 1.5);
-    });
-}
-
-const musicBtn = document.getElementById("music-btn");
-
-function startMusic(fromGate) {
-    musicOn = true;
-    musicBtn.classList.add("on");
-    musicBtn.innerHTML = '<span class="btn-icon icon-music">🎵</span>';
-    startPad();
-    if (!fromGate) chime();
-}
-
-musicBtn.addEventListener("click", () => {
-    if (musicOn) {
-        musicOn = false;
-        musicBtn.classList.remove("on");
-        musicBtn.innerHTML = '<span class="btn-icon icon-dance">🔇</span>';
-        stopPad();
-    } else {
-        startMusic(false);
-    }
 });
 
 /* ============================================================
@@ -1886,7 +1808,6 @@ CONFIG.chapters.forEach((ch, idx) => {
             out.classList.add("visible");
             const r = btn.getBoundingClientRect();
             burst(r.left + r.width / 2, r.top + r.height / 2, 26);
-            chime();
             await typeText(out, c.text);
         });
         row.appendChild(btn);
@@ -1905,7 +1826,6 @@ const typeObserver = new IntersectionObserver((entries) => {
                 const cur = block.querySelector(".cursor");
                 if (cur && entry.target.id === "text-3") {
                     document.getElementById("signature").classList.add("show");
-                    chime();
                 }
             }
         });
@@ -1967,13 +1887,11 @@ function wrapEmojis(root, className) {
 function wireLivingIcons() {
     // Transformer les émojis du texte en danseurs
     wrapEmojis(document.getElementById("enter-btn"), "btn-icon");
-    wrapEmojis(document.querySelector(".gate-hint"), "live-icon");
     wrapEmojis(document.querySelector(".scroll-hint"), "live-icon");
     wrapEmojis(document.getElementById("choices-row"), "btn-icon");
     wrapEmojis(document.querySelector(".total-days"), "live-icon");
     wrapEmojis(document.querySelector(".scratch-note"), "live-icon");
     wrapEmojis(document.querySelector(".scratch-reveal"), "live-icon");
-    wrapEmojis(document.getElementById("music-btn"), "btn-icon");
     wrapEmojis(document.querySelector("footer"), "live-icon");
 
     // Personnalité + rythme propre à chaque émoji (comme des personnes différentes)
@@ -2058,7 +1976,6 @@ function revealScratch() {
     sc.style.opacity = "0";
     setTimeout(() => { sc.style.display = "none"; }, 950);
     burst(window.innerWidth / 2, window.innerHeight / 2, 70);
-    chime();
 }
 
 sc.addEventListener("pointerdown", (e) => {
@@ -2108,5 +2025,5 @@ updateCounter();
 setInterval(updateCounter, 1000);
 updateSky();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc1948cc90d7e9',t:'MTc5MjU0MjA1MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc2e41fb31304e',t:'MTc5MjU0MjkwOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
